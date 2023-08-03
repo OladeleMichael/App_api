@@ -1,0 +1,18 @@
+copy and paste in your systemd folder so that your service can spin up immediately after server spin up.
+'not really important because you can use the nohup command'
+
+
+[Unit]
+Description=demo fastapi application
+After=network.target
+
+[Service]
+User=michael
+Group=michael
+WorkingDirectory=/home/michael/app/src
+Environment="PATH=/home/michael/app/venv/bin"
+EnvironmentFile=/home/michael.env
+ExecStart=/home/michael/app/venv/bin/gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:8000
+
+[Install]
+WantedBy=multi-user.target
