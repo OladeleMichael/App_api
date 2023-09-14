@@ -48,7 +48,7 @@ app.include_router(vote.router)
 #root
 @app.get("/")
 async def root():
-    return {"message": "Welcome to my creative space :) This page is under construction but you can access our API doc, add the following to the URL {/docs} "}
+    return {"message": "Welcome to my creative space :), enter the following to the URL {/docs} "}
 
 
 
