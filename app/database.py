@@ -32,7 +32,7 @@ def get_db():
 
 #     try:
 #         conn = psycopg2.connect(host='localhost' ,database ='fastapi', user = 'postgres', 
-#         password = '$M**_ola1***!', cursor_factory = RealDictCursor)
+#         password = 'cant touch this jk!', cursor_factory = RealDictCursor)
 #         cursor = conn.cursor()
 #         print ("Database connection successful! :)")
 #         break
