@@ -1,7 +1,9 @@
-from fastapi import FastAPI, Response, Request, status, HTTPException, Depends, APIRouter
+from fastapi import FastAPI, Response, Request, status, HTTPException, Depends, APIRouter, logger
 from .. import models, schemas, utils
 from .. database import get_db
 from sqlalchemy.orm import Session
+from ..customlogging import logger
+import json 
 
 
 router = APIRouter(
@@ -46,3 +48,11 @@ def get_user (id: int, db: Session = Depends(get_db)):
         #response.status_code= status.HTTP_404_NOT_FOUND
         #return {'message': f"post with id: {id} was not found"}
     return user
+
+
+@router.get ("/", response_model=list[schemas.UserOut])
+def get_users (db: Session = Depends(get_db)): 
+    user = db.query(models.User).all()
+    logger.info(user)
+    return user
+
