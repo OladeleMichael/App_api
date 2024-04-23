@@ -1,10 +1,20 @@
 from fastapi import FastAPI
-
+from .customlogging import logger
 from fastapi.middleware.cors import CORSMiddleware
 from .import models
 from .database import engine
 from .routers import post, user, auth , vote
 from .config import Settings
+import logging
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+
+
+
  
 #command for sql alchemy to run the create statement for all tables
 models.Base.metadata.create_all(bind=engine) 
@@ -12,6 +22,7 @@ models.Base.metadata.create_all(bind=engine)
 #check http://127.0.0.1:8000/docs#/ or http://127.0.0.1:8000/redoc for the api documentation
 
 app = FastAPI()
+logger.info("Starting API Server")
 
 #change origins to deployed app domain
 origins = ["*"] 
@@ -23,6 +34,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 
 my_posts = []
@@ -49,6 +61,5 @@ app.include_router(vote.router)
 @app.get("/")
 async def root():
     return {"message": "Welcome to my creative space :), enter the following to the URL {/docs} "}
-
 
 
