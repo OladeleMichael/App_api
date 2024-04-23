@@ -1,4 +1,8 @@
 __pycache__
 Mik3_Website/
 .env
+fail.log
 docker-compose-dev.yml
+tempCodeRunnerFile.py
+test.py
+app.log
